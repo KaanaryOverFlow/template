@@ -8,7 +8,7 @@ add_executable(${CMAKE_PROJECT_NAME} main.c utils.c)
 
 target_link_libraries(${CMAKE_PROJECT_NAME} -static)
 
-add_custom_command(TARGET ${CMAKE_PROJECT_NAME} command adb push ${CMAKE_PROJECT_NAME} /data/local/tmp)
+add_custom_command(TARGET ${CMAKE_PROJECT_NAME} COMMAND adb push ${CMAKE_PROJECT_NAME} /data/local/tmp)
 
 
 
