@@ -16,7 +16,7 @@ void setup() {
 
 int main() {
 	in();
-	note("a");
+	setup();
 	out();
 	return 0;
 }
