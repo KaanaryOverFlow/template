@@ -3,7 +3,7 @@
 #include <stdarg.h>
 
 void note(const char *fmt, ...) {
-	printf("\033[0;33m[✅] ");
+	printf("\033[0;33m[+] ");
 	va_list args;
 	va_start(args, fmt);
 	vprintf(fmt, args);
@@ -13,7 +13,7 @@ void note(const char *fmt, ...) {
 }
 
 void warn(const char *fmt, ...) {
-	printf("\033[0;31m[☣️ ] ");
+	printf("\033[0;31m[!] ");
 	va_list args;
 	va_start(args, fmt);
 	vprintf(fmt, args);
@@ -24,7 +24,7 @@ void warn(const char *fmt, ...) {
 }
 
 void info(const char *fmt, ...) {
-	printf("\033[47;30m[👀] ");
+	printf("\033[47;30m[i] ");
 	va_list args;
 	va_start(args, fmt);
 	vprintf(fmt, args);
