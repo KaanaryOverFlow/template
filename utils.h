@@ -10,3 +10,4 @@ void die(const char *fmt);
 
 #define in() {note("Calling => %s",__func__);}
 #define out() {note("Returing <= %s",__func__);}
+#define FOR(number) for (int i = 0; i < number; i++)
