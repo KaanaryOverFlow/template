@@ -2,7 +2,7 @@ cmake_minimum_required(VERSION 3.25)
 
 project(exploit)
 
-add_executable(${CMAKE_PROJECT_NAME} main.c utils.c)
+add_executable(${CMAKE_PROJECT_NAME} main.c utils.c memory.c)
 
 target_link_libraries(${CMAKE_PROJECT_NAME} -static)
 

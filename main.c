@@ -5,6 +5,7 @@
 #include <fcntl.h>
 
 #include "utils.h"
+#include "memory.h"
 
 struct {
 	int fd;	
@@ -22,11 +23,22 @@ void setup() {
 	ed->fd = open("/dev/dri/card0", O_RDWR);
 	if (ed->fd < 0) die("open Failed");
 
+	setup_memory_management();
+}
+
+void shape_heap() {
+	in();
+	do_shape(64, 2000);
+	getchar();
+	release_kernel_heap();
+	getchar();
+	out();
 }
 
 int main() {
 	in();
 	setup();
+	shape_heap();
 	out();
 	return 0;
 }
