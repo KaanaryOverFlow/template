@@ -24,14 +24,16 @@ void *__kmalloc(void *x) {
 	if (size < 16) die("kmalloc wrong size");
 	size = size >> 4;
 	struct iovec io[size];
-	io[0].iov_base = mm.page;
-	io[0].iov_len = 4096 * 2;
+	FOR(size) {
+		io[i].iov_base = mm.page;
+		io[i].iov_len = 4096 * 2;
+	}
 	syscall(__NR_writev, mm.pipefd[1], io, size);
 	return NULL;
 }
 
 void kmalloc(size_t size) {
-	pthread_create(&mm.tid, NULL, __kmalloc, (void *)size);
+	if ( pthread_create(&mm.tid, NULL, __kmalloc, (void *)size) < 0) die("pthread_create Failed");
 	
 }
 
@@ -46,6 +48,7 @@ void setup_memory_management(void) {
 	if ( fcntl(mm.pipefd[0], F_SETPIPE_SZ, 4096) != 4096) die("set pipe size failed");
 	mm.page = mmap(NULL, 4096 * 2, PROT_READ | PROT_WRITE, MAP_ANONYMOUS | MAP_PRIVATE, -1, 0);
 	if (mm.page == MAP_FAILED) die("mmap failed");
+	note("%s page : %p", __func__, mm.page);
 	signal(SIGPIPE, handle_sigpipe);
 }
 
