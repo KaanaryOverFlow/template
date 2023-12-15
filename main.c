@@ -20,8 +20,6 @@ void setup() {
 	ed = mmap(NULL, 4096 * 2, PROT_READ | PROT_WRITE, MAP_PRIVATE | MAP_ANONYMOUS, -1, 0);
 	if (ed == MAP_FAILED) die("inital map of setup");
 
-	ed->fd = open("/dev/dri/card0", O_RDWR);
-	if (ed->fd < 0) die("open Failed");
 
 	setup_memory_management();
 }
