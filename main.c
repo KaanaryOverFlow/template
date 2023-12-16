@@ -24,19 +24,10 @@ void setup() {
 	setup_memory_management();
 }
 
-void shape_heap() {
-	in();
-	do_shape(64, 2000);
-	getchar();
-	release_kernel_heap();
-	getchar();
-	out();
-}
 
 int main() {
 	in();
 	setup();
-	shape_heap();
 	out();
 	return 0;
 }
