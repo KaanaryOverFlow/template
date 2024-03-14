@@ -12,3 +12,4 @@ void hexdump(const void* data, size_t size);
 #define in() {note("Calling => %s",__func__);}
 #define out() {note("Returing <= %s",__func__);}
 #define FOR(number) for (unsigned long i = 0; i < number; i++)
+#define FORR(number) for (unsigned long ii = 0; ii < number; ii++)

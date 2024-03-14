@@ -21,7 +21,6 @@ void setup() {
 	if (ed == MAP_FAILED) die("inital map of setup");
 
 
-	setup_memory_management();
 }
 
 
