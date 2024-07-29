@@ -5,7 +5,13 @@ then
     echo "Configuring for arm64"
     echo "C compiler : $C"
     echo "C++ compiler : $CXX"
-    cmake -D CMAKE_C_COMPILER=$C -D CMAKE_CXX_COMPILER=$CXX -B ../build -S .
 else
-    cmake -B ../build -S .
+	C=clang
+	CXX=clang++
 fi
+
+mkdir -p ../build
+echo "all:" > ../build/Makefile
+echo -e "\t$C ../src/*.c -o exploit" >> ../build/Makefile
+echo -e "\t# adb push exploit /data/local/tmp" >> ../build/Makefile
+echo -e "\t# scp ./exploit root@localhost" >> ../build/Makefile
