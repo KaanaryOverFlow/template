@@ -23,10 +23,25 @@ void setup() {
 
 }
 
+void default_app() {
+	in();
+	out();
+}
 
-int main() {
+void sec_main(char *param) {
+	if (!param) {
+		default_app();
+	} else {
+		die("invalid parameter");
+	}
+
+}
+
+
+int main(int argc, char *argv[]) {
 	in();
 	setup();
+	sec_main(argv[1]);
 	out();
 	return 0;
 }
