@@ -14,4 +14,4 @@ mkdir -p ../build
 echo "all:" > ../build/Makefile
 echo -e "\t$C ../src/*.c -static -o exploit" >> ../build/Makefile
 echo -e "\t# adb push exploit /data/local/tmp" >> ../build/Makefile
-echo -e "\t# scp ./exploit root@localhost" >> ../build/Makefile
+echo -e "\t# scp ./exploit root@localhost:/root/" >> ../build/Makefile

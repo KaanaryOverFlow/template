@@ -7,6 +7,7 @@ void warn(const char *fmt, ...);
 void write_line(const char *fmt, ...);
 void die(const char *fmt);
 void hexdump(const void* data, size_t size);
+void pin_cpu(int num);
 
 
 #define in() {note("Calling => %s",__func__);}

@@ -1,6 +1,8 @@
+#define _GNU_SOURCE
 #include <stdio.h>
 #include <stdlib.h>
 #include <stdarg.h>
+#include <sched.h>
 
 void note(const char *fmt, ...) {
 	printf("\033[0;33m[+] ");
@@ -81,5 +83,11 @@ void hexdump(const void* data, size_t size) {
 	}
 }
 
+void pin_cpu(int num) {
+	cpu_set_t  mask;
+	CPU_ZERO(&mask);
+	CPU_SET(num, &mask);
+	if ( sched_setaffinity(0, sizeof(mask), &mask)) die("pinning cpu");
+}
 
 
