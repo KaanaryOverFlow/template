@@ -112,7 +112,7 @@ void *_hammer_thread_function(void *x) {
 	note("Hammering on %lu cpu", core);
 	
 	FOR(10000) {
-		if(pthread_create(&ids[i], NULL, _hammer_thread_busy_function, (void *)core) < 0) die("pthread failed to create busy loop");
+		if(pthread_create(&ids[i], NULL, _hammer_thread_busy_function, (void *)(unsigned long)core) < 0) die("pthread failed to create busy loop");
 	}
 
 	while(!hammer_flag);
