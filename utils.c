@@ -112,7 +112,7 @@ void *_hammer_thread_function(void *x) {
 	note("Hammering on %lu cpu", core);
 	
 	FOR(10000) {
-		pthread_create(&ids[i], NULL, _hammer_thread_busy_function, (void *)core);
+		if(pthread_create(&ids[i], NULL, _hammer_thread_busy_function, (void *)core) < 0) die("pthread failed to create busy loop");
 	}
 
 	while(!hammer_flag);
@@ -125,7 +125,7 @@ void hammer(int core) {
 	if (ids == MAP_FAILED) die("hammer map failed");
 	*(int *)ids = core;
 
-	pthread_create(&hammer_tid, NULL, _hammer_thread_function, (void *)ids);
+	if ( pthread_create(&hammer_tid, NULL, _hammer_thread_function, (void *)ids) < 0) die("pthread failed to create hammer");
 	note("Hammered. ");
 }
 
