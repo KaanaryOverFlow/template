@@ -3,6 +3,10 @@
 #include <stdlib.h>
 #include <stdarg.h>
 #include <sched.h>
+#include <pthread.h>
+#include <sys/mman.h>
+
+#include "utils.h"
 
 void note(const char *fmt, ...) {
 	printf("\033[0;33m[+] ");
@@ -90,4 +94,38 @@ void pin_cpu(int num) {
 	if ( sched_setaffinity(0, sizeof(mask), &mask)) die("pinning cpu");
 }
 
+unsigned long hammer_flag = 0;
+
+void *_hammer_thread_busy_function(void *x) {
+	int core = (unsigned long)x & 0xffffffff;
+	pin_cpu(core);
+	while(!hammer_flag);
+	return NULL;
+}
+
+pthread_t hammer_tid;
+
+void *_hammer_thread_function(void *x) {
+	pthread_t *ids = (pthread_t *)x;
+	int core = *(int *)ids;
+	pin_cpu(core);
+	note("Hammering on %lu cpu", core);
+	
+	FOR(10000) {
+		pthread_create(&ids[i], NULL, _hammer_thread_busy_function, (void *)core);
+	}
+
+	while(!hammer_flag);
+	return NULL;
+}
+
+void hammer(int core) {
+	note("getting hammer on core %d", core);
+	pthread_t *ids = mmap(NULL, 10000 * 8, PROT_READ | PROT_WRITE, MAP_PRIVATE | MAP_ANONYMOUS, -1, 0);
+	if (ids == MAP_FAILED) die("hammer map failed");
+	*(int *)ids = core;
+
+	pthread_create(&hammer_tid, NULL, _hammer_thread_function, (void *)ids);
+	note("Hammered. ");
+}
 
