@@ -25,6 +25,20 @@ void setup() {
 
 void default_app() {
 	in();
+	int a = 0;
+//	FOR(i, 0x80000)
+//		a += 16 * 16 * 16;
+//	}
+//	
+//	pd(a);
+//	pu(a);
+//	px(a);
+//	pf(a);
+//	plu(a);
+//	pld(a);
+//	plx(a);
+//	plf(a);
+
 	out();
 }
 

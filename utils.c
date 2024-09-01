@@ -2,6 +2,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <stdarg.h>
+#include <string.h>
 #include <sched.h>
 #include <pthread.h>
 #include <sys/mman.h>
@@ -93,5 +94,19 @@ void pin_cpu(int num) {
 	CPU_ZERO(&mask);
 	CPU_SET(num, &mask);
 	if ( sched_setaffinity(0, sizeof(mask), &mask)) die("pinning cpu");
+}
+
+void print_progress_bar(size_t progress, size_t total) {
+	fflush(stdout);
+	char *circle = "oqpbd";
+	char *wheel = "-\\|/";
+
+	char *current = wheel;
+
+	size_t len = strlen(current);
+	printf("[%c]" " %s %lf", *(current + progress % len), "%", (double)progress / (total - 1));
+	for(size_t i = 0; i < 50; i++)
+		printf("\b");
+
 }
 
