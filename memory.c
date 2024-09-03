@@ -24,7 +24,7 @@ void *__kmalloc(void *x) {
 	if (size < 16) die("kmalloc wrong size");
 	size = size >> 4;
 	struct iovec io[size];
-	FOR(i, size)
+	FOR(i, size) {
 		io[i].iov_base = mm.page;
 		io[i].iov_len = 4096 * 2;
 	}
@@ -55,7 +55,7 @@ void setup_memory_management(void) {
 void do_shape(size_t size, unsigned int count) {
 	in();
 	note("shaping kmalloc-%u cache with %u object...", size, count);
-	FOR(i, count)
+	FOR(i, count) {
 		kmalloc(size);
 	}
 	note("Done");
