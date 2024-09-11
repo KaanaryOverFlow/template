@@ -19,25 +19,12 @@ void setup() {
 	note("\t\t				    Zedeleyici.1337");
 	ed = mmap(NULL, 4096 * 2, PROT_READ | PROT_WRITE, MAP_PRIVATE | MAP_ANONYMOUS, -1, 0);
 	if (ed == MAP_FAILED) die("inital map of setup");
-
+	DEBUG;
 
 }
 
 void default_app() {
 	in();
-	int a = 0;
-//	FOR(i, 0x80000)
-//		a += 16 * 16 * 16;
-//	}
-//	
-//	pd(a);
-//	pu(a);
-//	px(a);
-//	pf(a);
-//	plu(a);
-//	pld(a);
-//	plx(a);
-//	plf(a);
 
 	out();
 }
