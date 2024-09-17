@@ -17,3 +17,4 @@ echo "all:" > ../build/Makefile
 echo -e "\t@$C `pwd`/*.c -static -o exploit" >> ../build/Makefile
 echo -e "\t@# adb push exploit /data/local/tmp" >> ../build/Makefile
 echo -e "\t@# scp ./exploit root@localhost:/root/" >> ../build/Makefile
+echo -e "\t@# ./exploit" >> ../build/Makefile
