@@ -13,7 +13,16 @@ fi
 
 
 mkdir -p ../build
-echo "all:" > ../build/Makefile
+echo "all: 1" > ../build/Makefile
+echo -e "\t@echo Done.\n" >> ../build/Makefile
+
+
+echo "1:" >> ../build/Makefile
 echo -e "\t@$C `pwd`/*.c -static -o exploit" >> ../build/Makefile
 echo -e "\t@# adb push exploit /data/local/tmp" >> ../build/Makefile
-echo -e "\t@# scp ./exploit root@localhost:/root/" >> ../build/Makefile
+echo -e "\t@# scp ./exploit root@localhost:/root/\n" >> ../build/Makefile
+
+echo "2:" >> ../build/Makefile
+echo -e "\t@$C `pwd`/*.c -DSHARED_LIBRARY -shared -fPIC -o libexploit.so" >> ../build/Makefile
+echo -e "\t@# adb push libexploit.so /data/local/tmp" >> ../build/Makefile
+echo -e "\t@# scp ./libexploit.so root@localhost:/root/" >> ../build/Makefile

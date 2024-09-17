@@ -38,6 +38,15 @@ void sec_main(char *param) {
 
 }
 
+#ifdef SHARED_LIBRARY
+void __attribute__ ((constructor)) _setup(void) {
+	in();
+	setup();
+	default_app();
+	out();
+}
+
+#else
 
 int main(int argc, char *argv[]) {
 	in();
@@ -46,3 +55,4 @@ int main(int argc, char *argv[]) {
 	out();
 	return 0;
 }
+#endif
