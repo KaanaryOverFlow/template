@@ -26,3 +26,4 @@ echo "2:" >> ../build/Makefile
 echo -e "\t@$C `pwd`/*.c -DSHARED_LIBRARY -shared -fPIC -o libexploit.so" >> ../build/Makefile
 echo -e "\t@# adb push libexploit.so /data/local/tmp" >> ../build/Makefile
 echo -e "\t@# scp ./libexploit.so root@localhost:/root/" >> ../build/Makefile
+
